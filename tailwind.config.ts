@@ -10,26 +10,18 @@ const config: Config = {
   daisyui: {
     themes: [
       {
-        mytheme: {
-          primary: "#006cff",
-
-          secondary: "#d53000",
-
-          accent: "#00aed4",
-
-          neutral: "#020418",
-
-          "base-100": "#223227",
-
-          info: "#009aff",
-
-          success: "#48c100",
-
-          warning: "#ffc000",
-
-          error: "#ff1871",
+        lightTheme: {
+          primary: "#f4aa3a",
+          secondary: "#f4f4a1",
+          accent: "#1be885",
+          neutral: "#272136",
+          "base-100": "#ffffff",
+          info: "#778ad4",
+          success: "#23b893",
+          warning: "#f79926",
+          error: "#ea535a",
           body: {
-            "background-color": "#223227",
+            "background-color": "#e3e6e6",
           },
         },
       },
