@@ -1,8 +1,5 @@
-// import { Prisma } from "@prisma/client";
-
-// import { prisma } from "@/lib/db/prisma";
-import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db/prisma";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Add Product - Flowmazon",
@@ -20,7 +17,7 @@ async function addProduct(formData: FormData) {
     throw Error("Missing required fields");
   }
 
-  await prisma?.product.create({
+  await prisma.product.create({
     data: { name, description, imageUrl, price },
   });
 
