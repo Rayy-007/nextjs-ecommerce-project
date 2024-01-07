@@ -15,7 +15,7 @@ const FormSubmitButton = ({
   ...props
 }: FormSubmitButtonProps) => {
   const { pending } = useFormStatus();
-  console.log(pending);
+
   return (
     <button
       {...props}
