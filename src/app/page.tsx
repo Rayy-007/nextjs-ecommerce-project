@@ -18,6 +18,7 @@ const page = async () => {
             width={400}
             height={800}
             className="max-w-sm rounded-lg shadow-lg"
+            priority
           />
           <div className="lg:py-17 flex flex-col items-center lg:items-start lg:px-6">
             <h1 className=" text-3xl font-bold lg:text-5xl">
