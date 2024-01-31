@@ -1,6 +1,8 @@
-import { Prisma } from "@prisma/client";
+import { Cart, Prisma } from "@prisma/client";
 import { cookies } from "next/dist/client/components/headers";
 import { prisma } from "./prisma";
+import { getServerSession } from "next-auth";
+import { authOptioins } from "@/app/api/auth/[...nextauth]/route";
 
 export type CartWithProducts = Prisma.CartGetPayload<{
   include: { items: { include: { product: true } } };
@@ -16,13 +18,24 @@ export type ShoppingCart = CartWithProducts & {
 };
 
 export async function getCart(): Promise<ShoppingCart | null> {
-  const localCartId = cookies().get("localCartId")?.value;
-  const cart = localCartId
-    ? await prisma.cart.findUnique({
-        where: { id: localCartId },
-        include: { items: { include: { product: true } } },
-      })
-    : null;
+  const session = await getServerSession(authOptioins);
+
+  let cart: CartWithProducts | null = null;
+
+  if (session) {
+    cart = await prisma.cart.findFirst({
+      where: { userId: session.user.id },
+      include: { items: { include: { product: true } } },
+    });
+  } else {
+    const localCartId = cookies().get("localCartId")?.value;
+    cart = localCartId
+      ? await prisma.cart.findUnique({
+          where: { id: localCartId },
+          include: { items: { include: { product: true } } },
+        })
+      : null;
+  }
 
   if (!cart) {
     return null;
@@ -39,12 +52,24 @@ export async function getCart(): Promise<ShoppingCart | null> {
 }
 
 export async function createCart(): Promise<ShoppingCart> {
-  const newCart = await prisma.cart.create({
-    data: {},
-  });
+  const session = await getServerSession(authOptioins);
 
-  // Note: Needs encryption + secure settings in real production app
-  cookies().set("localCartId", newCart.id);
+  let newCart: Cart;
+
+  if (session) {
+    newCart = await prisma.cart.create({
+      data: {
+        userId: session.user.id,
+      },
+    });
+  } else {
+    newCart = await prisma.cart.create({
+      data: {},
+    });
+
+    // Note: Needs encryption + secure settings in real production app
+    cookies().set("localCartId", newCart.id);
+  }
 
   return {
     ...newCart,
