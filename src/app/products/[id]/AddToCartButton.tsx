@@ -17,7 +17,7 @@ const AddToCartButton = ({
   return (
     <div className="flex items-center gap-2">
       <button
-        className="btn-primary btn"
+        className={`btn-primary btn ${isPending ? " pointer-events-none" : ""}`}
         onClick={() => {
           setSuccess(false);
           startTransition(async () => {
