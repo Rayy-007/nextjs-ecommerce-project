@@ -1,4 +1,4 @@
-("use client");
+"use client";
 
 import { MenuCloseIcon } from "./MenuCloseIcon";
 import { MenuIcon } from "./MenuIcon";

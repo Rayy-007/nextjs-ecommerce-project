@@ -3,7 +3,7 @@ import { prisma } from "@/lib/db/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import PaginationBar from "./config/PaginationBar";
-import Slider from "@/components/util/home/Slider";
+import ProgressSlider from "@/components/util/home/slider/progress-slider";
 
 interface HomeProps {
   searchParams: { page: string };
@@ -28,12 +28,9 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
 
   return (
     <div>
-      <div className="flex justify-end">
-        <div className="carousel-center carousel rounded-box h-96 w-2/3   space-x-4 bg-slate-400 p-4">
-          {products.map((product) => (
-            <Slider imageUrl={product.imageUrl} productName={product.name} />
-          ))}
-        </div>
+      <div className="mb-11 flex w-full justify-between">
+        <div>Menu</div>
+        <ProgressSlider items={products} />
       </div>
 
       <section className="flex flex-col items-center">
