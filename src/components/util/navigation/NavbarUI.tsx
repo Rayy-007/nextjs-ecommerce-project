@@ -1,5 +1,7 @@
-"use client";
+("use client");
 
+import { MenuCloseIcon } from "./MenuCloseIcon";
+import { MenuIcon } from "./MenuIcon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
@@ -69,20 +71,7 @@ const NavbarUI = ({ size }: NavbarUIProps) => {
               className="btn-ghost btn-circle btn"
               onClick={() => setIsOpenNav(false)}
             >
-              <svg
-                className="hover:text-primary-500 h-6 w-6 cursor-pointer"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
+              <MenuCloseIcon />
             </div>
           ) : (
             <div
@@ -91,20 +80,7 @@ const NavbarUI = ({ size }: NavbarUIProps) => {
               className="btn-ghost btn-circle btn "
               onClick={() => setIsOpenNav(true)}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h7"
-                />
-              </svg>
+              <MenuIcon />
             </div>
           )}
 
@@ -133,39 +109,3 @@ const NavbarUI = ({ size }: NavbarUIProps) => {
 };
 
 export default NavbarUI;
-
-// !
-// <nav className="bg-base-200">
-//   <div className="navbar m-auto max-w-7xl flex-col gap-2 sm:flex-row">
-//     <div className="flex-1">
-//       <Link href="/" className="btn-ghost btn text-xl normal-case">
-//         <Image src={logo} width={40} height={40} alt="Flowmazon Logo" />
-//         Flowmazon
-//       </Link>
-//     </div>
-// {/* <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-// <li><a>Item 1</a></li>
-// <li>
-//   <a>Parent</a>
-//   <ul className="p-2">
-//     <li><a>Submenu 1</a></li>
-//     <li><a>Submenu 2</a></li>
-//   </ul>
-// </li>
-// <li><a>Item 3</a></li>
-// </ul> */}
-//     <div className="flex-none gap-2">
-//       <form action={searchProduct}>
-//         <div className="form-control">
-//           <input
-//             name="searchQuery"
-//             placeholder="Search"
-//             className="input-bordered input w-full min-w-[150px] "
-//           />
-//         </div>
-//       </form>
-//       <ShoppingCartButton cart={cart} />
-//       <UserMenuButton session={session} />
-//     </div>
-//   </div>
-// </nav>
