@@ -3,9 +3,11 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Transition } from "@headlessui/react";
+import Link from "next/link";
 
 interface Item {
   imageUrl: string;
+  id: string;
   name: string;
 }
 
@@ -47,7 +49,7 @@ export default function ProgressSlider({ items }: { items: Item[] }) {
   }, []);
 
   return (
-    <div className=" flex w-fit max-w-5xl flex-col items-center rounded-lg bg-slate-300 p-10 text-center">
+    <div className=" flex w-fit max-w-5xl flex-col items-center rounded-lg  p-10 text-center">
       {/* Item image */}
       <div className="transition-all delay-300 duration-150 ease-in-out">
         <div className="relative flex flex-col" ref={itemsRef}>
@@ -63,23 +65,25 @@ export default function ProgressSlider({ items }: { items: Item[] }) {
               leaveTo="opacity-0 scale-95"
               beforeEnter={() => heightFix()}
             >
-              <Image
-                className="h-96 max-w-3xl rounded-xl"
-                src={item.imageUrl}
-                width={1024}
-                height={576}
-                alt={item.name}
-              />
+              <Link href={`/products/${item.id}`}>
+                <Image
+                  className="h-96 max-w-2xl rounded-xl object-cover"
+                  src={item.imageUrl}
+                  width={1024}
+                  height={576}
+                  alt={item.name}
+                />
+              </Link>
             </Transition>
           ))}
         </div>
       </div>
       {/* Buttons */}
-      <div className="mx-auto mt-8 grid max-w-xs grid-cols-2 gap-4 sm:max-w-sm md:max-w-3xl md:grid-cols-4">
+      <div className="mx-auto mt-8 flex   max-w-xs  gap-4 overflow-x-scroll sm:max-w-sm md:max-w-3xl ">
         {items.map((item, index) => (
           <button
             key={index}
-            className="group rounded p-2 focus:outline-none focus-visible:ring focus-visible:ring-indigo-300"
+            className="group w-96  min-w-[120px] rounded p-2 focus:outline-none focus-visible:ring focus-visible:ring-indigo-300"
             onClick={() => {
               setActive(index);
               setProgress(0);
@@ -112,6 +116,7 @@ export default function ProgressSlider({ items }: { items: Item[] }) {
             </span>
           </button>
         ))}
+        <input type="range" min={4} max="100" value="40" className="range" />
       </div>
     </div>
   );

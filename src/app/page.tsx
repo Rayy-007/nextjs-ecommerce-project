@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PaginationBar from "./config/PaginationBar";
 import ProgressSlider from "@/components/util/home/slider/progress-slider";
+import MegaMenu from "@/components/util/home/megaMenu/MegaMenu";
 
 interface HomeProps {
   searchParams: { page: string };
@@ -26,11 +27,15 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
     take: pageSize + (currentPage === 1 ? heroItemCount : 0),
   });
 
+  const allProducts = await prisma.product.findMany({
+    orderBy: { id: "desc" },
+  });
+
   return (
     <div>
       <div className="mb-11 flex w-full justify-between">
-        <div>Menu</div>
-        <ProgressSlider items={products} />
+        <MegaMenu />
+        <ProgressSlider items={allProducts} />
       </div>
 
       <section className="flex flex-col items-center">
