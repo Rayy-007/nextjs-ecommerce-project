@@ -3,14 +3,14 @@ import Link from "next/link";
 const MegaMenu = () => {
   return (
     <>
-      <ul className="menu menu-md w-full max-w-xs rounded-lg bg-base-200">
+      <ul className="menu menu-md w-full max-w-xs border-r ">
         <li>
           <details open>
             <summary>Fashion</summary>
             <ul>
               <li className="group/woman relative">
                 <summary>
-                  Woman's Fashion{" "}
+                  Woman's Fashion
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -45,7 +45,7 @@ const MegaMenu = () => {
 
               <li className="group/man relative">
                 <summary>
-                  Man's Fashion{" "}
+                  Man's Fashion
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"

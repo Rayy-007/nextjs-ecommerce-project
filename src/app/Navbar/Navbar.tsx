@@ -23,7 +23,7 @@ const Navbar = async () => {
   const session = await getServerSession(authOptioins);
 
   return (
-    <nav className="bg-base-200 py-5">
+    <nav className="py-5 shadow-sm">
       <div className="navbar m-auto  max-w-7xl flex-col justify-between gap-2 sm:flex-row">
         <div className="flex w-full flex-1  justify-between sm:w-auto  ">
           <Link href="/" className="btn-ghost btn text-xl normal-case">

@@ -3,7 +3,7 @@ import { prisma } from "@/lib/db/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import PaginationBar from "./config/PaginationBar";
-import ProgressSlider from "@/components/util/home/slider/progress-slider";
+import ProgressSlider from "@/components/util/home/slider/ProgressSlider";
 import MegaMenu from "@/components/util/home/megaMenu/MegaMenu";
 
 interface HomeProps {
@@ -33,7 +33,7 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
 
   return (
     <div>
-      <div className="mb-11 flex w-full justify-between">
+      <div className="mb-11  hidden w-full justify-between lg:flex">
         <MegaMenu />
         <ProgressSlider items={allProducts} />
       </div>
