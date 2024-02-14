@@ -25,3 +25,8 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #f4aa3a;
 }
+
+/* Hidden Scroll Bar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

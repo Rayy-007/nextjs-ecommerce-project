@@ -5,6 +5,7 @@ import Link from "next/link";
 import PaginationBar from "./config/PaginationBar";
 import ProgressSlider from "@/components/util/home/slider/ProgressSlider";
 import MegaMenu from "@/components/util/home/megaMenu/MegaMenu";
+import DiscountCounter from "@/components/DiscountCounter";
 
 interface HomeProps {
   searchParams: { page: string };
@@ -38,8 +39,8 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
         <ProgressSlider items={allProducts} />
       </div>
 
-      <section className="flex flex-col items-center">
-        <div className="hero rounded-2xl bg-base-200 ">
+      <section className=" flex flex-col items-center">
+        <div className="hero mb-8 rounded-2xl bg-base-200 ">
           {currentPage === 1 && (
             <div className="hero-content flex flex-col lg:flex-row">
               <Image
@@ -67,16 +68,39 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
             </div>
           )}
         </div>
-        <div className="my-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {/* Use of slice -> want to ignore the first item */}
-          {(currentPage === 1 ? products.slice(1) : products).map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <div className="w-full pb-6 pt-16">
+          <div className="flex flex-col gap-4">
+            <h6 className="flex items-center gap-5  text-base font-semibold text-primary">
+              <span className="h-12 w-5 rounded-lg bg-primary"></span>
+              Today's
+            </h6>
+            <div className="flex items-end gap-7">
+              <h2 className="text-4xl font-bold">Flash Sales</h2>
+              <div>
+                <DiscountCounter endDate={new Date("2024-02-18T23:59:59")} />
+              </div>
+            </div>
+          </div>
+
+          <div className="no-scrollbar my-8 flex  w-full  basis-96 gap-6 overflow-x-scroll pb-7 ">
+            {/* Use of slice -> want to ignore the first item */}
+            {(currentPage === 1 ? products.slice(1) : products).map(
+              (product) => (
+                <ProductCard key={product.id} product={product} />
+              )
+            )}
+          </div>
         </div>
-        <PaginationBar currentPage={currentPage} totalPages={totalPages} />
+        <Link href="/products" className="btn-primary btn rounded-sm">
+          Show All Proudcts
+        </Link>
+        {/* <PaginationBar currentPage={currentPage} totalPages={totalPages} /> */}
       </section>
     </div>
   );
 };
 
 export default Home;
+
+// Gid
+//grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3
