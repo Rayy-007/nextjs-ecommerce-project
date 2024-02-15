@@ -6,6 +6,7 @@ import PaginationBar from "./config/PaginationBar";
 import ProgressSlider from "@/components/util/home/slider/ProgressSlider";
 import MegaMenu from "@/components/util/home/megaMenu/MegaMenu";
 import DiscountCounter from "@/components/DiscountCounter";
+import CategoryMenu from "@/components/util/home/category/CategoryMenu";
 
 interface HomeProps {
   searchParams: { page: string };
@@ -68,7 +69,10 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
             </div>
           )}
         </div>
+
+        {/* Today's  Product Cards */}
         <div className="w-full pb-6 pt-16">
+          {/* Title */}
           <div className="flex flex-col gap-4">
             <h6 className="flex items-center gap-5  text-base font-semibold text-primary">
               <span className="h-12 w-5 rounded-lg bg-primary"></span>
@@ -79,9 +83,45 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
               <div>
                 <DiscountCounter endDate={new Date("2024-02-18T23:59:59")} />
               </div>
+              <div className="ml-auto mr-7 flex items-center gap-4">
+                <button className=" btn-circle btn">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11 5L4 12L11 19M4 12H20"
+                      stroke="black"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+                <button className="btn-circle btn">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3.5 12H20M20 12L13 5M20 12L13 19"
+                      stroke="black"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
-
+          {/* Card */}
           <div className="no-scrollbar my-8 flex  w-full  basis-96 gap-6 overflow-x-scroll pb-7 ">
             {/* Use of slice -> want to ignore the first item */}
             {(currentPage === 1 ? products.slice(1) : products).map(
@@ -96,6 +136,8 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
         </Link>
         {/* <PaginationBar currentPage={currentPage} totalPages={totalPages} /> */}
       </section>
+
+      <CategoryMenu />
     </div>
   );
 };
