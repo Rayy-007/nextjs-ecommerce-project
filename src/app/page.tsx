@@ -7,6 +7,7 @@ import ProgressSlider from "@/components/util/home/slider/ProgressSlider";
 import MegaMenu from "@/components/util/home/megaMenu/MegaMenu";
 import DiscountCounter from "@/components/DiscountCounter";
 import CategoryMenu from "@/components/util/home/category/CategoryMenu";
+import ProductContainer from "@/components/ProductContainer";
 
 interface HomeProps {
   searchParams: { page: string };
@@ -41,7 +42,55 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
       </div>
 
       <section className=" flex flex-col items-center">
-        <div className="hero mb-8 rounded-2xl bg-base-200 ">
+        <ProductContainer
+          label="Today's"
+          title="Flash Sales"
+          disCounter={true}
+          arrow={true}
+        />
+        <Link href="/products" className="btn-primary btn rounded-sm">
+          Show All Proudcts
+        </Link>
+        {/* <PaginationBar currentPage={currentPage} totalPages={totalPages} /> */}
+      </section>
+
+      <CategoryMenu />
+      <ProductContainer label="This Month" title="Best Selling Products" />
+
+      <div className="flex flex-col items-center">
+        <ProductContainer
+          label="Our Products"
+          title="Explore Our Products"
+          arrow={true}
+          isAllProducts={true}
+          isTowCol={true}
+        />
+        <Link href="/products" className="btn-primary btn rounded-sm">
+          Show All Proudcts
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+// Gid
+//grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3
+
+// {/* Card */}
+// <div className="no-scrollbar my-8 flex  w-full  basis-96 gap-6 overflow-x-scroll pb-7 ">
+// {/* Use of slice -> want to ignore the first item */}
+// {(currentPage === 1 ? products.slice(1) : products).map(
+//   (product) => (
+//     <ProductCard key={product.id} product={product} />
+//   )
+// )}
+// </div>
+
+//? Hero Card
+{
+  /* <div className="hero mb-8 rounded-2xl bg-base-200 ">
           {currentPage === 1 && (
             <div className="hero-content flex flex-col lg:flex-row">
               <Image
@@ -68,81 +117,5 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
               </div>
             </div>
           )}
-        </div>
-
-        {/* Today's  Product Cards */}
-        <div className="w-full pb-6 pt-16">
-          {/* Title */}
-          <div className="flex flex-col gap-4">
-            <h6 className="flex items-center gap-5  text-base font-semibold text-primary">
-              <span className="h-12 w-5 rounded-lg bg-primary"></span>
-              Today's
-            </h6>
-            <div className="flex items-end gap-7">
-              <h2 className="text-4xl font-bold">Flash Sales</h2>
-              <div>
-                <DiscountCounter endDate={new Date("2024-02-18T23:59:59")} />
-              </div>
-              <div className="ml-auto mr-7 flex items-center gap-4">
-                <button className=" btn-circle btn">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11 5L4 12L11 19M4 12H20"
-                      stroke="black"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-                <button className="btn-circle btn">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M3.5 12H20M20 12L13 5M20 12L13 19"
-                      stroke="black"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          {/* Card */}
-          <div className="no-scrollbar my-8 flex  w-full  basis-96 gap-6 overflow-x-scroll pb-7 ">
-            {/* Use of slice -> want to ignore the first item */}
-            {(currentPage === 1 ? products.slice(1) : products).map(
-              (product) => (
-                <ProductCard key={product.id} product={product} />
-              )
-            )}
-          </div>
-        </div>
-        <Link href="/products" className="btn-primary btn rounded-sm">
-          Show All Proudcts
-        </Link>
-        {/* <PaginationBar currentPage={currentPage} totalPages={totalPages} /> */}
-      </section>
-
-      <CategoryMenu />
-    </div>
-  );
-};
-
-export default Home;
-
-// Gid
-//grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3
+        </div> */
+}
