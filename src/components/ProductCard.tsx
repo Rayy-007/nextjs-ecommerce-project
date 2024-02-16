@@ -7,9 +7,10 @@ import { formatPrice } from "@/lib/format";
 interface ProductCardProps {
   product: Product;
   className?: string;
+  discount?: boolean;
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, className, discount }: ProductCardProps) => {
   // Checking the product is created less than 7 days or not, if it is less than 7 days, this product is new item
   const isNew =
     Date.now() - new Date(product.createdAt).getTime() <
@@ -21,9 +22,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
       className="card shadow-md lg:min-w-[280px]"
     >
       <figure className="relative">
-        <span className="btn-error btn-sm btn absolute left-4 top-4 text-white ">
-          - 40%
-        </span>
+        {discount && (
+          <span className="btn-error btn-sm btn absolute left-4 top-4 text-white ">
+            - 40%
+          </span>
+        )}
         <div className="absolute right-4 top-4 flex flex-col gap-2">
           <span className="btn-circle btn shadow-sm  ">
             <svg

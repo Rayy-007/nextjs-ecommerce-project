@@ -89,7 +89,11 @@ const ProductContainer = async ({
       {/* Card */}
       <div className="no-scrollbar my-8 flex  w-full  basis-96 gap-6 overflow-x-scroll pb-7 ">
         {(isAllProducts ? allProducts : allProducts.slice(7)).map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            discount={disCounter}
+          />
         ))}
       </div>
       {isTowCol && (

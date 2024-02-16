@@ -2,12 +2,12 @@ import ProductCard from "@/components/ProductCard";
 import { prisma } from "@/lib/db/prisma";
 import Image from "next/image";
 import Link from "next/link";
-import PaginationBar from "./config/PaginationBar";
+// import PaginationBar from "./config/PaginationBar";
 import ProgressSlider from "@/components/util/home/slider/ProgressSlider";
 import MegaMenu from "@/components/util/home/megaMenu/MegaMenu";
-import DiscountCounter from "@/components/DiscountCounter";
 import CategoryMenu from "@/components/util/home/category/CategoryMenu";
 import ProductContainer from "@/components/ProductContainer";
+import BannerLg from "@/components/util/home/banner/BannerLg";
 
 interface HomeProps {
   searchParams: { page: string };
@@ -35,12 +35,13 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
   });
 
   return (
-    <div>
+    <>
       <div className="mb-11  hidden w-full justify-between lg:flex">
         <MegaMenu />
         <ProgressSlider items={allProducts} />
       </div>
 
+      {/* Flash Sales */}
       <section className=" flex flex-col items-center">
         <ProductContainer
           label="Today's"
@@ -51,12 +52,16 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
         <Link href="/products" className="btn-primary btn rounded-sm">
           Show All Proudcts
         </Link>
-        {/* <PaginationBar currentPage={currentPage} totalPages={totalPages} /> */}
       </section>
 
+      {/* Menu */}
       <CategoryMenu />
+      {/* Best Selling  */}
       <ProductContainer label="This Month" title="Best Selling Products" />
 
+      <BannerLg />
+
+      {/* Explore Products */}
       <div className="flex flex-col items-center">
         <ProductContainer
           label="Our Products"
@@ -69,7 +74,7 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
           Show All Proudcts
         </Link>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -87,6 +92,9 @@ export default Home;
 //   )
 // )}
 // </div>
+{
+  /* <PaginationBar currentPage={currentPage} totalPages={totalPages} /> */
+}
 
 //? Hero Card
 {

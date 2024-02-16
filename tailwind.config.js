@@ -12,7 +12,7 @@ module.exports = {
         lightTheme: {
           primary: "#DB4444",
           // primary: "#f4aa3a",
-          secondary: "#f4f4a1",
+          secondary: "#00FF66",
           accent: "#1be885",
           neutral: "#272136",
           "base-100": "#ffffff",
