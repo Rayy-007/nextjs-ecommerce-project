@@ -10,8 +10,9 @@ module.exports = {
     themes: [
       {
         lightTheme: {
-          primary: "#f4aa3a",
-          secondary: "#f4f4a1",
+          primary: "#DB4444",
+          // primary: "#f4aa3a",
+          secondary: "#00FF66",
           accent: "#1be885",
           neutral: "#272136",
           "base-100": "#ffffff",
@@ -20,7 +21,7 @@ module.exports = {
           warning: "#f79926",
           error: "#ea535a",
           body: {
-            "background-color": "#e3e6e6",
+            "background-color": "#FFFFFF",
           },
         },
       },

@@ -2,7 +2,12 @@ import ProductCard from "@/components/ProductCard";
 import { prisma } from "@/lib/db/prisma";
 import Image from "next/image";
 import Link from "next/link";
-import PaginationBar from "./config/PaginationBar";
+// import PaginationBar from "./config/PaginationBar";
+import ProgressSlider from "@/components/util/home/slider/ProgressSlider";
+import MegaMenu from "@/components/util/home/megaMenu/MegaMenu";
+import CategoryMenu from "@/components/util/home/category/CategoryMenu";
+import ProductContainer from "@/components/ProductContainer";
+import BannerLg from "@/components/util/home/banner/BannerLg";
 
 interface HomeProps {
   searchParams: { page: string };
@@ -25,45 +30,100 @@ const Home = async ({ searchParams: { page = "1" } }: HomeProps) => {
     take: pageSize + (currentPage === 1 ? heroItemCount : 0),
   });
 
+  const allProducts = await prisma.product.findMany({
+    orderBy: { id: "desc" },
+  });
+
   return (
-    <section className="flex flex-col items-center">
-      <div className="hero rounded-2xl bg-base-200 ">
-        {currentPage === 1 && (
-          <div className="hero-content flex flex-col lg:flex-row">
-            <Image
-              src={products[0].imageUrl}
-              alt={products[0].name}
-              width={400}
-              height={800}
-              className="w-full max-w-sm rounded-lg shadow-lg"
-              priority
-            />
-            <div className="lg:py-17 flex flex-col items-center lg:items-start lg:px-6">
-              <h1 className=" text-3xl font-bold lg:text-5xl">
-                {products[0].name}
-              </h1>
-              <p className="py-4 text-center lg:py-6 lg:text-left">
-                {products[0].description}
-              </p>
-              <Link
-                href={`/products/${products[0].id}`}
-                className="btn-primary btn"
-              >
-                Check it out
-              </Link>
-            </div>
-          </div>
-        )}
+    <>
+      <div className="mb-11  hidden w-full justify-between lg:flex">
+        <MegaMenu />
+        <ProgressSlider items={allProducts} />
       </div>
-      <div className="my-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {/* Use of slice -> want to ignore the first item */}
-        {(currentPage === 1 ? products.slice(1) : products).map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+
+      {/* Flash Sales */}
+      <section className=" flex flex-col items-center">
+        <ProductContainer
+          label="Today's"
+          title="Flash Sales"
+          disCounter={true}
+          arrow={true}
+        />
+        <Link href="/products" className="btn-primary btn rounded-sm">
+          Show All Proudcts
+        </Link>
+      </section>
+
+      {/* Menu */}
+      <CategoryMenu />
+      {/* Best Selling  */}
+      <ProductContainer label="This Month" title="Best Selling Products" />
+
+      <BannerLg />
+
+      {/* Explore Products */}
+      <div className="flex flex-col items-center">
+        <ProductContainer
+          label="Our Products"
+          title="Explore Our Products"
+          arrow={true}
+          isAllProducts={true}
+          isTowCol={true}
+        />
+        <Link href="/products" className="btn-primary btn rounded-sm">
+          Show All Proudcts
+        </Link>
       </div>
-      <PaginationBar currentPage={currentPage} totalPages={totalPages} />
-    </section>
+    </>
   );
 };
 
 export default Home;
+
+// Gid
+//grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3
+
+// {/* Card */}
+// <div className="no-scrollbar my-8 flex  w-full  basis-96 gap-6 overflow-x-scroll pb-7 ">
+// {/* Use of slice -> want to ignore the first item */}
+// {(currentPage === 1 ? products.slice(1) : products).map(
+//   (product) => (
+//     <ProductCard key={product.id} product={product} />
+//   )
+// )}
+// </div>
+{
+  /* <PaginationBar currentPage={currentPage} totalPages={totalPages} /> */
+}
+
+//? Hero Card
+{
+  /* <div className="hero mb-8 rounded-2xl bg-base-200 ">
+          {currentPage === 1 && (
+            <div className="hero-content flex flex-col lg:flex-row">
+              <Image
+                src={products[0].imageUrl}
+                alt={products[0].name}
+                width={400}
+                height={800}
+                className="w-full max-w-sm rounded-lg shadow-lg"
+                priority
+              />
+              <div className="lg:py-17 flex flex-col items-center lg:items-start lg:px-6">
+                <h1 className=" text-3xl font-bold lg:text-5xl">
+                  {products[0].name}
+                </h1>
+                <p className="py-4 text-center lg:py-6 lg:text-left">
+                  {products[0].description}
+                </p>
+                <Link
+                  href={`/products/${products[0].id}`}
+                  className="btn-primary btn"
+                >
+                  Check it out
+                </Link>
+              </div>
+            </div>
+          )}
+        </div> */
+}

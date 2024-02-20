@@ -7,6 +7,7 @@ import { getCart } from "@/lib/db/cart";
 import UserMenuButton from "./UserMenuButton";
 import { getServerSession } from "next-auth";
 import { authOptioins } from "../api/auth/[...nextauth]/route";
+import NavbarUI from "@/components/util/navigation/NavbarUI";
 
 const searchProduct = async (formData: FormData) => {
   "use server";
@@ -22,14 +23,20 @@ const Navbar = async () => {
   const session = await getServerSession(authOptioins);
 
   return (
-    <nav className="bg-base-200">
-      <div className="navbar m-auto max-w-7xl flex-col gap-2 sm:flex-row">
-        <div className="flex-1">
+    <nav className="py-5 shadow-sm">
+      <div className="navbar m-auto  max-w-7xl flex-col justify-between gap-2 sm:flex-row">
+        <div className="flex w-full flex-1  justify-between sm:w-auto  ">
           <Link href="/" className="btn-ghost btn text-xl normal-case">
             <Image src={logo} width={40} height={40} alt="Flowmazon Logo" />
             Flowmazon
           </Link>
+          {/* Navbar - Mobile */}
+          <NavbarUI size="mobile" />
         </div>
+
+        {/* Navbar - Desktop */}
+        <NavbarUI size="desktop" />
+
         <div className="flex-none gap-2">
           <form action={searchProduct}>
             <div className="form-control">
@@ -42,6 +49,8 @@ const Navbar = async () => {
           </form>
           <ShoppingCartButton cart={cart} />
           <UserMenuButton session={session} />
+          {/* Navbar - Tablet */}
+          <NavbarUI size="tablet" />
         </div>
       </div>
     </nav>
